@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="悠闲的宅的博客">
 <meta property="og:description" content="1 介绍&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;自定义线程池，有两种实现方式：  更改spring默认的线程池配置，全局生效 自定义新的线程池，指定作用范围  上一篇文章《Spring Boot笔记-多线程系列(一)-使用多线程》-使用多线程/)使用的就是spring默认的线程池。   2 实现2.1 更改spring默认线程池配置2.1.1 介绍&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-14T08:18:31.326Z">
+<meta property="og:updated_time" content="2018-12-14T08:19:59.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot笔记——多线程系列(二)——自定义多线程">
 <meta name="twitter:description" content="1 介绍&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;自定义线程池，有两种实现方式：  更改spring默认的线程池配置，全局生效 自定义新的线程池，指定作用范围  上一篇文章《Spring Boot笔记-多线程系列(一)-使用多线程》-使用多线程/)使用的就是spring默认的线程池。   2 实现2.1 更改spring默认线程池配置2.1.1 介绍&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
@@ -398,7 +398,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-14 16:18:31" itemprop="dateModified" datetime="2018-12-14T16:18:31+08:00">2018-12-14</time>
+                <time title="修改时间：2018-12-14 16:19:59" itemprop="dateModified" datetime="2018-12-14T16:19:59+08:00">2018-12-14</time>
               
             
           </span>
@@ -518,7 +518,6 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据日志结果，线程名前缀都是<code>system-thread</code>，也就是我们自己自定义的名称前缀，说明修改默认配置参数信息成功。</p>
 </li>
 </ul>
-<p>### </p>
 <h2 id="2-2-自定义新的线程池"><a href="#2-2-自定义新的线程池" class="headerlink" title="2.2 自定义新的线程池"></a>2.2 自定义新的线程池</h2><h3 id="2-2-1-介绍"><a href="#2-2-1-介绍" class="headerlink" title="2.2.1 介绍"></a>2.2.1 介绍</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自定义线程池与spring默认的线程池的差别在于：</p>
 <ul>
 <li><p>配置类，不需要实现<code>AsyncConfigurer</code></p>
