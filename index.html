@@ -384,7 +384,7 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:22:41 / 修改时间：14:24:51" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:41+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 14:22:41 / 修改时间：15:13:49" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:41+08:00">2018-12-28</time>
             
 
             
@@ -456,7 +456,59 @@
       
         
           
-            
+            <h1 id="1-几个定义"><a href="#1-几个定义" class="headerlink" title="1 几个定义"></a>1 几个定义</h1><h2 id="1-1-index"><a href="#1-1-index" class="headerlink" title="1.1 index"></a>1.1 index</h2><ul>
+<li><p>索引（名词）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个索引类似于传统关系数据库中的一个 数据库 ，是一个存储关系型文档的地方。 索引 (index) 的复数词为 indices 或 indexes 。</p>
+</li>
+<li><p>索引（动词）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索引一个文档 就是存储一个文档到一个 索引 （名词）中以便它可以被检索和查询到。这非常类似于 SQL 语句中的 INSERT 关键词，除了文档已存在时新文档会替换旧文档情况之外。</p>
+</li>
+</ul>
+<h2 id="1-2-type"><a href="#1-2-type" class="headerlink" title="1.2 type"></a>1.2 type</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分组，由一个或多个json的记录组成。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不同的 Type 应该有相似的结构（schema）。</p>
+<h2 id="1-3-document"><a href="#1-3-document" class="headerlink" title="1.3 document"></a>1.3 document</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分组里的每个json。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json里放了具体的信息，如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"user"</span>: <span class="string">"张三"</span>,</span><br><span class="line">  <span class="attr">"title"</span>: <span class="string">"工程师"</span>,</span><br><span class="line">  <span class="attr">"desc"</span>: <span class="string">"数据库管理"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h1><h2 id="2-1-新增索引"><a href="#2-1-新增索引" class="headerlink" title="2.1 新增索引"></a>2.1 新增索引</h2><ul>
+<li><p>新增语句如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;localhost:9200/megacorp/employee/1?pretty&apos; -H &apos;Content-Type: application/json&apos; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">    &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">    &quot;age&quot; : 25,</span><br><span class="line">    &quot;about&quot; : &quot;I love to go rock climbing&quot;,</span><br><span class="line">    &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>megacorp：index名称</p>
+<p>Employee: type名称</p>
+<p>{xxxxx}：json串，记录了数据信息</p>
+</li>
+</ul>
+<h2 id="2-2-全部查询"><a href="#2-2-全部查询" class="headerlink" title="2.2 全部查询"></a>2.2 全部查询</h2><ul>
+<li><p>查询index为megacorp，type为employee全部数据，指令如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XGET 'localhost:9200/megacorp/employee/_search'</span><br></pre></td></tr></table></figure>
+<p>控制台打印的信息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"took"</span>:<span class="number">7</span>,<span class="attr">"timed_out"</span>:<span class="literal">false</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">5</span>,<span class="attr">"successful"</span>:<span class="number">5</span>,<span class="attr">"skipped"</span>:<span class="number">0</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"hits"</span>:&#123;<span class="attr">"total"</span>:<span class="number">1</span>,<span class="attr">"max_score"</span>:<span class="number">1.0</span>,<span class="attr">"hits"</span>:[&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_score"</span>:<span class="number">1.0</span>,<span class="attr">"_source"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">      <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">      <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">      <span class="attr">"about"</span> : <span class="string">"I love to go rock climbing"</span>,</span><br><span class="line">      <span class="attr">"interests"</span>: [ <span class="string">"sports"</span>, <span class="string">"music"</span> ]</span><br><span class="line">  &#125;&#125;]&#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-3-简单查询"><a href="#2-3-简单查询" class="headerlink" title="2.3 简单查询"></a>2.3 简单查询</h2><ul>
+<li><p>查询index为megacorp，type为employee中的first_name为John的数据，指令如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XGET 'localhost:9200/megacorp/employee/_search?q=first_name:John</span><br></pre></td></tr></table></figure>
+<p>控制台打印的信息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"took"</span>:<span class="number">43</span>,<span class="attr">"timed_out"</span>:<span class="literal">false</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">5</span>,<span class="attr">"successful"</span>:<span class="number">5</span>,<span class="attr">"skipped"</span>:<span class="number">0</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"hits"</span>:&#123;<span class="attr">"total"</span>:<span class="number">1</span>,<span class="attr">"max_score"</span>:<span class="number">0.2876821</span>,<span class="attr">"hits"</span>:[&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_score"</span>:<span class="number">0.2876821</span>,<span class="attr">"_source"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">      <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">      <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">      <span class="attr">"about"</span> : <span class="string">"I love to go rock climbing"</span>,</span><br><span class="line">      <span class="attr">"interests"</span>: [ <span class="string">"sports"</span>, <span class="string">"music"</span> ]</span><br><span class="line">  &#125;&#125;]&#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-4-更新数据"><a href="#2-4-更新数据" class="headerlink" title="2.4 更新数据"></a>2.4 更新数据</h2><p>更新数据，即是把数据重新插进去，会自动覆盖之前的数据。</p>
+<h2 id="2-5-删除数据"><a href="#2-5-删除数据" class="headerlink" title="2.5 删除数据"></a>2.5 删除数据</h2><ul>
+<li><p>指令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XDELETE &apos;localhost:9200/megacorp/employee/1&apos;\</span><br></pre></td></tr></table></figure>
+<p>控制台打印的信息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_version"</span>:<span class="number">2</span>,<span class="attr">"result"</span>:<span class="string">"deleted"</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">2</span>,<span class="attr">"successful"</span>:<span class="number">1</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"_seq_no"</span>:<span class="number">1</span>,<span class="attr">"_primary_term"</span>:<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除文档不会立即将文档从磁盘中删除，只是将文档标记为已删除状态。随着你不断的索引更多的数据，Elasticsearch 将会在后台清理标记为已删除的文档。</p>
+</li>
+</ul>
+<h1 id="3-引用"><a href="#3-引用" class="headerlink" title="3 引用"></a>3 引用</h1><blockquote>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener">《Elasticsearch: 权威指南》</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html" target="_blank" rel="noopener">《全文搜索引擎 Elasticsearch 入门教程》</a></p>
+</blockquote>
+
           
         
       
@@ -730,7 +782,7 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:21:54 / 修改时间：14:24:44" itemprop="dateCreated datePublished" datetime="2018-12-28T14:21:54+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 14:21:54 / 修改时间：15:12:46" itemprop="dateCreated datePublished" datetime="2018-12-28T14:21:54+08:00">2018-12-28</time>
             
 
             
@@ -802,7 +854,113 @@
       
         
           
-            
+            <h1 id="1-系统环境"><a href="#1-系统环境" class="headerlink" title="1 系统环境"></a>1 系统环境</h1><ul>
+<li><p>操作系统：Mac OS X(10.13.2 )</p>
+</li>
+<li><p>Java 1.8.0_151</p>
+</li>
+</ul>
+<h1 id="2-Elastic安装"><a href="#2-Elastic安装" class="headerlink" title="2 Elastic安装"></a>2 Elastic安装</h1><h2 id="2-1-安装的简单说明"><a href="#2-1-安装的简单说明" class="headerlink" title="2.1 安装的简单说明"></a>2.1 安装的简单说明</h2><p>按照<a href="https://www.elastic.co/cn/downloads/elasticsearch" target="_blank" rel="noopener">官网</a>的说明，安装步骤如下：</p>
+<ol>
+<li><p>下载安装包</p>
+</li>
+<li><p>启动程序</p>
+</li>
+<li><p>检查是否启动成功</p>
+</li>
+</ol>
+<h2 id="2-2-下载安装包"><a href="#2-2-下载安装包" class="headerlink" title="2.2 下载安装包"></a>2.2 下载安装包</h2><ul>
+<li><p>方式一</p>
+<p>打开官网，点击【下载】，选择Elasticsearch，再选择ZIP安装包</p>
+<p><img src="http://aishow.top/elastic-mac安装-官网下载页面.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li><p>方式二</p>
+<p>输入指令<code>$ curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.1.2.zip</code>，控制台打印日志如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.1.2.zip</span><br><span class="line"></span><br><span class="line">% Total % Received % Xferd Average Speed Time Time Time Current</span><br><span class="line">								Dload Upload Total Spent Left Speed</span><br><span class="line">100 27.0M 100 27.0M 0 0 401k 0 0:01:09 0:01:09 --:--:-- 580k</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-3启动服务"><a href="#2-3启动服务" class="headerlink" title="2.3启动服务"></a>2.3启动服务</h2><ol>
+<li><p>进入下载的目录<code>$ cd elasticsearch-6.1.2</code></p>
+</li>
+<li><p>执行启动指令<code>$ ./bin/elasticsearch</code></p>
+<p>控制台打印信息如下图：</p>
+<p><img src="http://aishow.top/elastic-mac安装-启动服务.png" alt=""></p>
+</li>
+</ol>
+<h2 id="2-4-获取版本信息"><a href="#2-4-获取版本信息" class="headerlink" title="2.4 获取版本信息"></a>2.4 获取版本信息</h2><ol>
+<li><p>另开一个标签页</p>
+</li>
+<li><p>执行指令<code>$ curl localhost:9200</code></p>
+<p>控制台打印信息如下： </p>
+<p><img src="http://aishow.top/elastic-mac安装-获取版本信息.png" alt="">  </p>
+</li>
+</ol>
+<h2 id="2-5-备注"><a href="#2-5-备注" class="headerlink" title="2.5 备注"></a>2.5 备注</h2><ul>
+<li><p>停止Elastic，在启动选项卡中直接<code>control+c</code>即可停止。</p>
+</li>
+<li><p>如果你想把 Elasticsearch 作为一个守护进程在后台运行，那么可以在后面添加参数 <code>-d</code>。</p>
+</li>
+<li><p>默认情况下，Elastics只允许本机访问，如果需要远程访问，可以修改 Elastic 安装目录的<code>config/elasticsearch.yml</code>文件，去掉<code>network.host</code>的注释，将它的值改成<code>0.0.0.0</code>，然后重新启动 Elastic。</p>
+<p><img src="http://aishow.top/elastic-mac安装-备注.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li><p>安装中文插件</p>
+<p>在安装目录下，运行指令：<code>$ ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.1.2/elasticsearch-analysis-ik-6.1.2.zip</code>。</p>
+<p>注意版本要一致。</p>
+<p>安装完成后，重启。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ ./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.1.2/elasticsearch-analysis-ik-6.1.2.zip</span><br><span class="line"></span><br><span class="line">-&gt; Downloading https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.1.2/elasticsearch-analysis-ik-6.1.2.zip</span><br><span class="line"></span><br><span class="line">[=================================================] 100%   </span><br><span class="line"></span><br><span class="line">-&gt; Installed analysis-ik</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="3-Kibana安装"><a href="#3-Kibana安装" class="headerlink" title="3 Kibana安装"></a>3 Kibana安装</h1><h2 id="3-1-安装的简单说明"><a href="#3-1-安装的简单说明" class="headerlink" title="3.1 安装的简单说明"></a>3.1 安装的简单说明</h2><p>按照官网给出的资料（<a href="https://www.elastic.co/cn/downloads/kibana" target="_blank" rel="noopener">链接</a>），安装步骤顺序如下：</p>
+<ol>
+<li><p>下载Kibana安装包</p>
+</li>
+<li><p>打开<code>config/kibana.yml</code>配置文件，并进行设置</p>
+</li>
+<li><p>运行指令启动Kibana</p>
+</li>
+<li><p>打开浏览器访问<code>http://localhost:5601</code></p>
+</li>
+</ol>
+<h2 id="3-2-下载安装包"><a href="#3-2-下载安装包" class="headerlink" title="3.2 下载安装包"></a>3.2 下载安装包</h2><ul>
+<li><p>方式一：</p>
+<p>打开<a href="https://www.elastic.co" target="_blank" rel="noopener">官网</a>，点击【下载】，选择Kibana，再选择ZIP安装包（<a href="https://www.elastic.co/cn/downloads/kibana" target="_blank" rel="noopener">链接</a>）。</p>
+</li>
+</ul>
+<p><img src="http://aishow.top/elastic-mac安装-kibana官网下载.png" alt=""></p>
+<ul>
+<li><p>方式二：</p>
+<p>输入指令<code>$ wget https://artifacts.elastic.co/downloads/kibana/kibana-6.1.2-darwin-x86_64.tar.gz</code></p>
+</li>
+</ul>
+<h2 id="3-3-修改配置文件"><a href="#3-3-修改配置文件" class="headerlink" title="3.3 修改配置文件"></a>3.3 修改配置文件</h2><ol>
+<li><p>将下载的安装包进行解压<code>$ tar -zvxf kibana-6.1.2-darwin-x86_64.tar</code>。</p>
+</li>
+<li><p>进入解压后目录的config目录下<code>$ cd kibana-6.1.2-darwin-x86_64/config/</code>。</p>
+</li>
+<li><p>找到kibana.yml文件，进行编辑<code>$ vim kibana.yml</code>。</p>
+</li>
+<li><p>找到<code>elasticsearch.url</code>，去掉前面的注释，并且将值设置为Elasticsearch的实例。更改如下图</p>
+<p><img src="http://aishow.top/elastic-mac安装-修改配置文件.png" alt=""></p>
+</li>
+</ol>
+<h2 id="3-4-启动服务"><a href="#3-4-启动服务" class="headerlink" title="3.4 启动服务"></a>3.4 启动服务</h2><p>进入安装目录的config文件夹下，执行指令<code>$ ./kibana</code>。</p>
+<p><img src="http://aishow.top/elastic-mac安装-启动服务.png" alt=""></p>
+<h2 id="3-5-打开浏览器访问"><a href="#3-5-打开浏览器访问" class="headerlink" title="3.5 打开浏览器访问"></a>3.5 打开浏览器访问</h2><p>打开浏览器，输入地址<code>http://localhost:5601</code>。</p>
+<p><img src="http://aishow.top/elastic-mac%E5%AE%89%E8%A3%85-%E9%A1%B5%E9%9D%A2%E8%AE%BF%E9%97%AE.png" alt=""></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html" target="_blank" rel="noopener">《全文搜索引擎 Elasticsearch 入门教程》</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/running-elasticsearch.html" target="_blank" rel="noopener">《Elasticsearch: 权威指南》</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.extlight.com/2017/10/31/Kibana-基础入门/" target="_blank" rel="noopener">《Kibana 基础入门》</a></p>
+</blockquote>
+
           
         
       
@@ -903,7 +1061,7 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:21:16 / 修改时间：14:32:53" itemprop="dateCreated datePublished" datetime="2018-12-28T14:21:16+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 14:21:16 / 修改时间：15:15:16" itemprop="dateCreated datePublished" datetime="2018-12-28T14:21:16+08:00">2018-12-28</time>
             
 
             
@@ -975,53 +1133,23 @@
       
         
           
-            <h1 id="1-几个定义"><a href="#1-几个定义" class="headerlink" title="1 几个定义"></a>1 几个定义</h1><h2 id="1-1-index"><a href="#1-1-index" class="headerlink" title="1.1 index"></a>1.1 index</h2><ul>
-<li><p>索引（名词）</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个索引类似于传统关系数据库中的一个 数据库 ，是一个存储关系型文档的地方。 索引 (index) 的复数词为 indices 或 indexes 。</p>
+            <h1 id="1-Elastic"><a href="#1-Elastic" class="headerlink" title="1 Elastic"></a>1 Elastic</h1><h2 id="1-1-什么是Elasticsearch"><a href="#1-1-什么是Elasticsearch" class="headerlink" title="1.1 什么是Elasticsearch"></a>1.1 什么是Elasticsearch</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elasticsearch是一个实时的分布式搜索分析引擎。</p>
+<h2 id="1-2-作用"><a href="#1-2-作用" class="headerlink" title="1.2 作用"></a>1.2 作用</h2><ul>
+<li><p>快速存储数据</p>
 </li>
-<li><p>索引（动词）</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索引一个文档 就是存储一个文档到一个 索引 （名词）中以便它可以被检索和查询到。这非常类似于 SQL 语句中的 INSERT 关键词，除了文档已存在时新文档会替换旧文档情况之外。</p>
+<li><p>快速搜索数据</p>
 </li>
-</ul>
-<h2 id="1-2-type"><a href="#1-2-type" class="headerlink" title="1.2 type"></a>1.2 type</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分组，由一个或多个json的记录组成。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不同的 Type 应该有相似的结构（schema）。</p>
-<h2 id="1-3-document"><a href="#1-3-document" class="headerlink" title="1.3 document"></a>1.3 document</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分组里的每个json。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json里放了具体的信息，如下：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"user"</span>: <span class="string">"张三"</span>,</span><br><span class="line">  <span class="attr">"title"</span>: <span class="string">"工程师"</span>,</span><br><span class="line">  <span class="attr">"desc"</span>: <span class="string">"数据库管理"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h1><h2 id="2-1-新增索引"><a href="#2-1-新增索引" class="headerlink" title="2.1 新增索引"></a>2.1 新增索引</h2><ul>
-<li><p>新增语句如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;localhost:9200/megacorp/employee/1?pretty&apos; -H &apos;Content-Type: application/json&apos; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">    &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">    &quot;age&quot; : 25,</span><br><span class="line">    &quot;about&quot; : &quot;I love to go rock climbing&quot;,</span><br><span class="line">    &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<p>megacorp：index名称</p>
-<p>Employee: type名称</p>
-<p>{xxxxx}：json串，记录了数据信息</p>
+<li><p>快速分析数据</p>
 </li>
 </ul>
-<h2 id="2-2-全部查询"><a href="#2-2-全部查询" class="headerlink" title="2.2 全部查询"></a>2.2 全部查询</h2><ul>
-<li><p>查询index为megacorp，type为employee全部数据，指令如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XGET 'localhost:9200/megacorp/employee/_search'</span><br></pre></td></tr></table></figure>
-<p>控制台打印的信息：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"took"</span>:<span class="number">7</span>,<span class="attr">"timed_out"</span>:<span class="literal">false</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">5</span>,<span class="attr">"successful"</span>:<span class="number">5</span>,<span class="attr">"skipped"</span>:<span class="number">0</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"hits"</span>:&#123;<span class="attr">"total"</span>:<span class="number">1</span>,<span class="attr">"max_score"</span>:<span class="number">1.0</span>,<span class="attr">"hits"</span>:[&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_score"</span>:<span class="number">1.0</span>,<span class="attr">"_source"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">      <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">      <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">      <span class="attr">"about"</span> : <span class="string">"I love to go rock climbing"</span>,</span><br><span class="line">      <span class="attr">"interests"</span>: [ <span class="string">"sports"</span>, <span class="string">"music"</span> ]</span><br><span class="line">  &#125;&#125;]&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-Kibana"><a href="#2-Kibana" class="headerlink" title="2 Kibana"></a>2 Kibana</h1><h2 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个开源的分析和可视化平台</p>
+<h2 id="2-2-作用"><a href="#2-2-作用" class="headerlink" title="2.2 作用"></a>2.2 作用</h2><ul>
+<li><p>旨在与 Elasticsearch 合作。</p>
+</li>
+<li><p>Kibana 提供搜索、查看和与存储在 Elasticsearch 索引中的数据进行交互的功能。开发者或运维人员可以轻松地执行高级数据分析，并在各种图表、表格和地图中可视化数据。</p>
 </li>
 </ul>
-<h2 id="2-3-简单查询"><a href="#2-3-简单查询" class="headerlink" title="2.3 简单查询"></a>2.3 简单查询</h2><ul>
-<li><p>查询index为megacorp，type为employee中的first_name为John的数据，指令如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XGET 'localhost:9200/megacorp/employee/_search?q=first_name:John</span><br></pre></td></tr></table></figure>
-<p>控制台打印的信息：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"took"</span>:<span class="number">43</span>,<span class="attr">"timed_out"</span>:<span class="literal">false</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">5</span>,<span class="attr">"successful"</span>:<span class="number">5</span>,<span class="attr">"skipped"</span>:<span class="number">0</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"hits"</span>:&#123;<span class="attr">"total"</span>:<span class="number">1</span>,<span class="attr">"max_score"</span>:<span class="number">0.2876821</span>,<span class="attr">"hits"</span>:[&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_score"</span>:<span class="number">0.2876821</span>,<span class="attr">"_source"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">      <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">      <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">      <span class="attr">"about"</span> : <span class="string">"I love to go rock climbing"</span>,</span><br><span class="line">      <span class="attr">"interests"</span>: [ <span class="string">"sports"</span>, <span class="string">"music"</span> ]</span><br><span class="line">  &#125;&#125;]&#125;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="2-4-更新数据"><a href="#2-4-更新数据" class="headerlink" title="2.4 更新数据"></a>2.4 更新数据</h2><p>更新数据，即是把数据重新插进去，会自动覆盖之前的数据。</p>
-<h2 id="2-5-删除数据"><a href="#2-5-删除数据" class="headerlink" title="2.5 删除数据"></a>2.5 删除数据</h2><ul>
-<li><p>指令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XDELETE &apos;localhost:9200/megacorp/employee/1&apos;\</span><br></pre></td></tr></table></figure>
-<p>控制台打印的信息：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_version"</span>:<span class="number">2</span>,<span class="attr">"result"</span>:<span class="string">"deleted"</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">2</span>,<span class="attr">"successful"</span>:<span class="number">1</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"_seq_no"</span>:<span class="number">1</span>,<span class="attr">"_primary_term"</span>:<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除文档不会立即将文档从磁盘中删除，只是将文档标记为已删除状态。随着你不断的索引更多的数据，Elasticsearch 将会在后台清理标记为已删除的文档。</p>
-</li>
-</ul>
-<h1 id="3-引用"><a href="#3-引用" class="headerlink" title="3 引用"></a>3 引用</h1><blockquote>
+<h1 id="3-参考资料"><a href="#3-参考资料" class="headerlink" title="3 参考资料"></a>3 参考资料</h1><blockquote>
 <p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener">《Elasticsearch: 权威指南》</a></p>
 </blockquote>
 <blockquote>

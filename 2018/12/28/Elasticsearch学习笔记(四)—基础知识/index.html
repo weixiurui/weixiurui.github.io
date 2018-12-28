@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="悠闲的宅的博客">
+  <meta name="description" content="1 几个定义1.1 index 索引（名词） &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;一个索引类似于传统关系数据库中的一个 数据库 ，是一个存储关系型文档的地方。 索引 (index) 的复数词为 indices 或 indexes 。  索引（动词） &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 <meta name="keywords" content="大数据,Elasticsearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch学习笔记(四)—基础知识">
 <meta property="og:url" content="http://yoursite.com/2018/12/28/Elasticsearch学习笔记(四)—基础知识/index.html">
 <meta property="og:site_name" content="悠闲的宅的博客">
-<meta property="og:description" content="悠闲的宅的博客">
+<meta property="og:description" content="1 几个定义1.1 index 索引（名词） &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;一个索引类似于传统关系数据库中的一个 数据库 ，是一个存储关系型文档的地方。 索引 (index) 的复数词为 indices 或 indexes 。  索引（动词） &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-28T06:24:51.927Z">
+<meta property="og:updated_time" content="2018-12-28T07:13:49.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch学习笔记(四)—基础知识">
-<meta name="twitter:description" content="悠闲的宅的博客">
+<meta name="twitter:description" content="1 几个定义1.1 index 索引（名词） &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;一个索引类似于传统关系数据库中的一个 数据库 ，是一个存储关系型文档的地方。 索引 (index) 的复数词为 indices 或 indexes 。  索引（动词） &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb">
 
 
 
@@ -381,7 +381,7 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:22:41 / 修改时间：14:24:51" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:41+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 14:22:41 / 修改时间：15:13:49" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:41+08:00">2018-12-28</time>
             
 
             
@@ -451,7 +451,59 @@
       
 
       
-        
+        <h1 id="1-几个定义"><a href="#1-几个定义" class="headerlink" title="1 几个定义"></a>1 几个定义</h1><h2 id="1-1-index"><a href="#1-1-index" class="headerlink" title="1.1 index"></a>1.1 index</h2><ul>
+<li><p>索引（名词）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个索引类似于传统关系数据库中的一个 数据库 ，是一个存储关系型文档的地方。 索引 (index) 的复数词为 indices 或 indexes 。</p>
+</li>
+<li><p>索引（动词）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索引一个文档 就是存储一个文档到一个 索引 （名词）中以便它可以被检索和查询到。这非常类似于 SQL 语句中的 INSERT 关键词，除了文档已存在时新文档会替换旧文档情况之外。</p>
+</li>
+</ul>
+<h2 id="1-2-type"><a href="#1-2-type" class="headerlink" title="1.2 type"></a>1.2 type</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分组，由一个或多个json的记录组成。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不同的 Type 应该有相似的结构（schema）。</p>
+<h2 id="1-3-document"><a href="#1-3-document" class="headerlink" title="1.3 document"></a>1.3 document</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分组里的每个json。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;json里放了具体的信息，如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"user"</span>: <span class="string">"张三"</span>,</span><br><span class="line">  <span class="attr">"title"</span>: <span class="string">"工程师"</span>,</span><br><span class="line">  <span class="attr">"desc"</span>: <span class="string">"数据库管理"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-操作"><a href="#2-操作" class="headerlink" title="2 操作"></a>2 操作</h1><h2 id="2-1-新增索引"><a href="#2-1-新增索引" class="headerlink" title="2.1 新增索引"></a>2.1 新增索引</h2><ul>
+<li><p>新增语句如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPUT &apos;localhost:9200/megacorp/employee/1?pretty&apos; -H &apos;Content-Type: application/json&apos; -d&apos;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">    &quot;last_name&quot; : &quot;Smith&quot;,</span><br><span class="line">    &quot;age&quot; : 25,</span><br><span class="line">    &quot;about&quot; : &quot;I love to go rock climbing&quot;,</span><br><span class="line">    &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<p>megacorp：index名称</p>
+<p>Employee: type名称</p>
+<p>{xxxxx}：json串，记录了数据信息</p>
+</li>
+</ul>
+<h2 id="2-2-全部查询"><a href="#2-2-全部查询" class="headerlink" title="2.2 全部查询"></a>2.2 全部查询</h2><ul>
+<li><p>查询index为megacorp，type为employee全部数据，指令如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XGET 'localhost:9200/megacorp/employee/_search'</span><br></pre></td></tr></table></figure>
+<p>控制台打印的信息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"took"</span>:<span class="number">7</span>,<span class="attr">"timed_out"</span>:<span class="literal">false</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">5</span>,<span class="attr">"successful"</span>:<span class="number">5</span>,<span class="attr">"skipped"</span>:<span class="number">0</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"hits"</span>:&#123;<span class="attr">"total"</span>:<span class="number">1</span>,<span class="attr">"max_score"</span>:<span class="number">1.0</span>,<span class="attr">"hits"</span>:[&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_score"</span>:<span class="number">1.0</span>,<span class="attr">"_source"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">      <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">      <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">      <span class="attr">"about"</span> : <span class="string">"I love to go rock climbing"</span>,</span><br><span class="line">      <span class="attr">"interests"</span>: [ <span class="string">"sports"</span>, <span class="string">"music"</span> ]</span><br><span class="line">  &#125;&#125;]&#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-3-简单查询"><a href="#2-3-简单查询" class="headerlink" title="2.3 简单查询"></a>2.3 简单查询</h2><ul>
+<li><p>查询index为megacorp，type为employee中的first_name为John的数据，指令如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XGET 'localhost:9200/megacorp/employee/_search?q=first_name:John</span><br></pre></td></tr></table></figure>
+<p>控制台打印的信息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"took"</span>:<span class="number">43</span>,<span class="attr">"timed_out"</span>:<span class="literal">false</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">5</span>,<span class="attr">"successful"</span>:<span class="number">5</span>,<span class="attr">"skipped"</span>:<span class="number">0</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"hits"</span>:&#123;<span class="attr">"total"</span>:<span class="number">1</span>,<span class="attr">"max_score"</span>:<span class="number">0.2876821</span>,<span class="attr">"hits"</span>:[&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_score"</span>:<span class="number">0.2876821</span>,<span class="attr">"_source"</span>:</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="attr">"first_name"</span> : <span class="string">"John"</span>,</span><br><span class="line">      <span class="attr">"last_name"</span> : <span class="string">"Smith"</span>,</span><br><span class="line">      <span class="attr">"age"</span> : <span class="number">25</span>,</span><br><span class="line">      <span class="attr">"about"</span> : <span class="string">"I love to go rock climbing"</span>,</span><br><span class="line">      <span class="attr">"interests"</span>: [ <span class="string">"sports"</span>, <span class="string">"music"</span> ]</span><br><span class="line">  &#125;&#125;]&#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-4-更新数据"><a href="#2-4-更新数据" class="headerlink" title="2.4 更新数据"></a>2.4 更新数据</h2><p>更新数据，即是把数据重新插进去，会自动覆盖之前的数据。</p>
+<h2 id="2-5-删除数据"><a href="#2-5-删除数据" class="headerlink" title="2.5 删除数据"></a>2.5 删除数据</h2><ul>
+<li><p>指令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XDELETE &apos;localhost:9200/megacorp/employee/1&apos;\</span><br></pre></td></tr></table></figure>
+<p>控制台打印的信息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"_index"</span>:<span class="string">"megacorp"</span>,<span class="attr">"_type"</span>:<span class="string">"employee"</span>,<span class="attr">"_id"</span>:<span class="string">"1"</span>,<span class="attr">"_version"</span>:<span class="number">2</span>,<span class="attr">"result"</span>:<span class="string">"deleted"</span>,<span class="attr">"_shards"</span>:&#123;<span class="attr">"total"</span>:<span class="number">2</span>,<span class="attr">"successful"</span>:<span class="number">1</span>,<span class="attr">"failed"</span>:<span class="number">0</span>&#125;,<span class="attr">"_seq_no"</span>:<span class="number">1</span>,<span class="attr">"_primary_term"</span>:<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除文档不会立即将文档从磁盘中删除，只是将文档标记为已删除状态。随着你不断的索引更多的数据，Elasticsearch 将会在后台清理标记为已删除的文档。</p>
+</li>
+</ul>
+<h1 id="3-引用"><a href="#3-引用" class="headerlink" title="3 引用"></a>3 引用</h1><blockquote>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener">《Elasticsearch: 权威指南》</a></p>
+</blockquote>
+<blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html" target="_blank" rel="noopener">《全文搜索引擎 Elasticsearch 入门教程》</a></p>
+</blockquote>
+
       
     </div>
 
@@ -542,8 +594,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -667,6 +728,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-几个定义"><span class="nav-text">1 几个定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-index"><span class="nav-text">1.1 index</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-type"><span class="nav-text">1.2 type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-document"><span class="nav-text">1.3 document</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-操作"><span class="nav-text">2 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-新增索引"><span class="nav-text">2.1 新增索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-全部查询"><span class="nav-text">2.2 全部查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-简单查询"><span class="nav-text">2.3 简单查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-更新数据"><span class="nav-text">2.4 更新数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-删除数据"><span class="nav-text">2.5 删除数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-引用"><span class="nav-text">3 引用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
