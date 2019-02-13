@@ -339,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/28/Elasticsearch学习笔记(四)—基础知识/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/13/Spring-Boot笔记—环境搭建—Mybatis集成/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="魏修瑞">
@@ -359,7 +359,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/12/28/Elasticsearch学习笔记(四)—基础知识/" class="post-title-link" itemprop="http://yoursite.com/index.html">Elasticsearch学习笔记(四)—基础知识</a>
+                <a href="/2019/02/13/Spring-Boot笔记—环境搭建—Mybatis集成/" class="post-title-link" itemprop="http://yoursite.com/index.html">Spring Boot笔记—搭建Mybatis环境</a>
               
             
           </h1>
@@ -384,12 +384,436 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:22:41 / 修改时间：15:13:49" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:41+08:00">2018-12-28</time>
+              <time title="创建时间：2019-02-13 14:58:52 / 修改时间：16:35:36" itemprop="dateCreated datePublished" datetime="2019-02-13T14:58:52+08:00">2019-02-13</time>
             
 
             
               
 
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/" itemprop="url" rel="index"><span itemprop="name">工作技能</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/" itemprop="url" rel="index"><span itemprop="name">框架</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/Spring/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/Spring/Spring-Boot/环境搭建/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="1-目的"><a href="#1-目的" class="headerlink" title="1 目的"></a>1 目的</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;搭建一个spring boot + Mybatis + MVC的环境</p>
+<h1 id="2-开发环境和开发工具"><a href="#2-开发环境和开发工具" class="headerlink" title="2 开发环境和开发工具"></a>2 开发环境和开发工具</h1><ul>
+<li>开发工具：IntelliJ IDEA 2018.1</li>
+<li>Maven: 3.6.0</li>
+<li>Mysql: 8.0.13</li>
+</ul>
+<h1 id="3-开始搭建"><a href="#3-开始搭建" class="headerlink" title="3 开始搭建"></a>3 开始搭建</h1><h2 id="3-1-最终的项目结构"><a href="#3-1-最终的项目结构" class="headerlink" title="3.1 最终的项目结构"></a>3.1 最终的项目结构</h2><p><img src="http://aishow.top/%E9%9B%86%E6%88%90Mybatis%E5%90%8E%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt="集成Mybatis后的工程整体架构"></p>
+<h2 id="3-2-创建一个Spring-Boot的maven工程"><a href="#3-2-创建一个Spring-Boot的maven工程" class="headerlink" title="3.2 创建一个Spring Boot的maven工程"></a>3.2 创建一个Spring Boot的maven工程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此步骤省略</p>
+<h2 id="3-3-添加maven相关依赖"><a href="#3-3-添加maven相关依赖" class="headerlink" title="3.3 添加maven相关依赖"></a>3.3 添加maven相关依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mysql --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- druid --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- mybatis --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- swagger --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-4-创建项目配置文件"><a href="#3-4-创建项目配置文件" class="headerlink" title="3.4 创建项目配置文件"></a>3.4 创建项目配置文件</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在<code>resources</code>目录下创建<code>application.yml</code>文件，设置tomcat端口，设置数据库连接信息。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">8989</span></span><br><span class="line"><span class="attr">    tomcat:</span></span><br><span class="line"><span class="attr">        uri-encoding:</span> <span class="string">UTF-8</span></span><br><span class="line"><span class="attr">        max-threads:</span> <span class="number">1000</span></span><br><span class="line"><span class="attr">        min-spare-threads:</span> <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line"><span class="attr">    driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span> <span class="comment"># 这是mysql8.0.13版本的驱动。</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://localhost:3306/rabbit?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">xxxxxxxxx</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span> <span class="comment"># 数据源类型：Druid</span></span><br><span class="line"><span class="attr">    initialSize:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">    minIdle:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">    maxActive:</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-5-在启动类添加注解"><a href="#3-5-在启动类添加注解" class="headerlink" title="3.5 在启动类添加注解"></a>3.5 在启动类添加注解</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在启动类<code>DataxApplication.java</code>里，添加扫描mapper的注解<code>@MapperScan(&quot;top.yxdz.**.mapper&quot;)</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableTransactionManagement</span></span><br><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"top.yxdz.**.mapper"</span>)</span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataxApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DataxApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-6-添加contoller"><a href="#3-6-添加contoller" class="headerlink" title="3.6 添加contoller"></a>3.6 添加contoller</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在controller目录下，添加类<code>JobController.java</code>，调用service层的<code>getJobById(String id)</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/api/job"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JobController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    IJobService iJobService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/&#123;id&#125;/info"</span>)</span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"通过作业id获取作业信息"</span>, response = AjaxResult.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> AjaxResult <span class="title">getJobById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> String id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iJobService.getJobById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-7-添加service"><a href="#3-7-添加service" class="headerlink" title="3.7 添加service"></a>3.7 添加service</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在service目录下，添加接口<code>IJobService.java</code>，在该目录下的<code>impl</code>添加该接口的实现类<code>JobServiceImpl.java</code></p>
+<h3 id="3-7-1-IJobService-java"><a href="#3-7-1-IJobService-java" class="headerlink" title="3.7.1 IJobService.java"></a>3.7.1 <code>IJobService.java</code></h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该接口定义一个方法<code>getJobById(String id)</code>，实现通过id从数据库查找对应数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IJobService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过id获取作业内容</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> JobEntity</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">AjaxResult <span class="title">getJobById</span><span class="params">(String id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-7-2-JobServiceImpl-java"><a href="#3-7-2-JobServiceImpl-java" class="headerlink" title="3.7.2 JobServiceImpl.java"></a>3.7.2 <code>JobServiceImpl.java</code></h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该类是接口<code>IJobService.java</code>的实现类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span>(<span class="string">"JobServiceImpl"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JobServiceImpl</span> <span class="keyword">implements</span> <span class="title">IJobService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger LOG = LogManager.getLogger(JobServiceImpl.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    JobMapper jobMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AjaxResult <span class="title">getJobById</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        AjaxResult result = <span class="keyword">new</span> AjaxResult();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            JobEntity jobEntity = jobMapper.getJobById(id);</span><br><span class="line"></span><br><span class="line">            result.setCode(Constants.SUCCESS);</span><br><span class="line">            result.setData(jobEntity);</span><br><span class="line">            result.setMsg(<span class="string">"获取作业["</span> + id + <span class="string">"]信息成功"</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            result.setMsg(<span class="string">"获取作业["</span> + id + <span class="string">"]信息失败"</span>);</span><br><span class="line">            LOG.error(<span class="string">"获取作业[&#123;&#125;]失败：&#123;&#125;"</span>, id, e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-8-添加mapper"><a href="#3-8-添加mapper" class="headerlink" title="3.8 添加mapper"></a>3.8 添加mapper</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在mapper目录下，分别创建文件<code>JobMapper.java</code>、<code>JobMapper.xml</code>。</p>
+<h3 id="3-8-1-JobMapper-java"><a href="#3-8-1-JobMapper-java" class="headerlink" title="3.8.1 JobMapper.java"></a>3.8.1 <code>JobMapper.java</code></h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件是一个接口文件，定义了通过mybatis访问数据库的函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">JobMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据id获取作业信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 作业id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> JobEntity</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">JobEntity <span class="title">getJobById</span><span class="params">(String id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-8-2-JobMapper-xml"><a href="#3-8-2-JobMapper-xml" class="headerlink" title="3.8.2 JobMapper.xml"></a>3.8.2 <code>JobMapper.xml</code></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"top.yxdz.datax.job.mapper.JobMapper"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"top.yxdz.datax.job.entity.JobEntity"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span>  /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"Base_Column_List"</span>&gt;</span></span><br><span class="line">      id, name</span><br><span class="line">    <span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getJobById"</span> <span class="attr">resultMap</span>=<span class="string">"BaseResultMap"</span>&gt;</span></span><br><span class="line">        select</span><br><span class="line">          <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"Base_Column_List"</span> /&gt;</span></span><br><span class="line">        from tbl_datax_job</span><br><span class="line">        where id=#&#123;id, jdbcType=VARCHAR&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-9-添加entity"><a href="#3-9-添加entity" class="headerlink" title="3.9 添加entity"></a>3.9 添加entity</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在mapper目录下，创建数据库表对应的实体类<code>JobEntity</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JobEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"JobEntity&#123;"</span> +</span><br><span class="line">                <span class="string">"   id="</span> + id + <span class="string">"\n"</span> +</span><br><span class="line">                <span class="string">"   name"</span> + name + <span class="string">"\n"</span> +</span><br><span class="line">                <span class="string">"&#125;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-10-测试"><a href="#3-10-测试" class="headerlink" title="3.10 测试"></a>3.10 测试</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上配置完毕，开始测试。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;启动项目。</p>
+<h3 id="3-10-1-配置了swagger"><a href="#3-10-1-配置了swagger" class="headerlink" title="3.10.1 配置了swagger"></a>3.10.1 配置了swagger</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在地址栏输入地址<code>http://localhost:8989/swagger-ui.html</code>，然后找到刚才写的restful接口，将参数id的值<code>da0c96dc-2c0b-429d-ab33-cb44ff7b6677</code>放进去执行一下查看返回的结果是否正确。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"code"</span>: <span class="string">"SUCCESS"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"da0c96dc-2c0b-429d-ab33-cb44ff7b6677"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"mysql2mysql"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"msg"</span>: <span class="string">"获取作业[da0c96dc-2c0b-429d-ab33-cb44ff7b6677]信息成功"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-10-2-未配置swagger"><a href="#3-10-2-未配置swagger" class="headerlink" title="3.10.2 未配置swagger"></a>3.10.2 未配置swagger</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在地址栏输入地址<code>http://localhost:8989/api/job/da0c96dc-2c0b-429d-ab33-cb44ff7b6677/info</code>直接查看返回页面的内容是否正确(因为是测试的接口是GET请求，所以可以直接在地址栏运行。如果是其他类型请求，则需要使用postman模仿相关请求)。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"SUCCESS"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"id"</span>: <span class="string">"da0c96dc-2c0b-429d-ab33-cb44ff7b6677"</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"mysql2mysql"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"msg"</span>: <span class="string">"获取作业[da0c96dc-2c0b-429d-ab33-cb44ff7b6677]信息成功"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-遇到的问题"><a href="#4-遇到的问题" class="headerlink" title="4 遇到的问题"></a>4 遇到的问题</h1><h2 id="4-1-Invalid-bound-statement-not-found"><a href="#4-1-Invalid-bound-statement-not-found" class="headerlink" title="4.1 Invalid bound statement (not found)"></a>4.1 <code>Invalid bound statement (not found)</code></h2><ul>
+<li><p>错误日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 45545 --- [nio-8989-exec-1] t.y.d.job.service.impl.JobServiceImpl    : 获取作业[da0c96dc-2c0b-429d-ab33-cb44ff7b6677]失败：Invalid bound statement (not found): top.yxdz.datax.job.mapper.JobMapper.getJobById</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原因</p>
+<p>未将<code>JobMapper.xml</code>的内容加载进去</p>
+</li>
+<li><p>解决方法</p>
+<p>在<code>pom.xml</code>文件中，将一下内容加进去</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-2-spring注解方式-idea报could-not-autowire"><a href="#4-2-spring注解方式-idea报could-not-autowire" class="headerlink" title="4.2 spring注解方式 idea报could not autowire"></a>4.2 spring注解方式 idea报could not autowire</h2><ul>
+<li><p>错误日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Could not autowire. No beans of ‘jobMapper’ type found.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原因</p>
+</li>
+<li><p>解决方法</p>
+<p><code>File</code>-<code>Project Structure</code>页面 <code>Facets</code>下删掉 <code>Spring</code>。</p>
+</li>
+</ul>
+<h1 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5 参考文章"></a>5 参考文章</h1><blockquote>
+<p><a href="https://www.oschina.net/question/202626_181237" target="_blank" rel="noopener">spring注解方式 idea报could not autowire，eclipse却没有问题</a></p>
+<p><a href="https://blog.csdn.net/qq_33768099/article/details/79787215" target="_blank" rel="noopener">Spring Boot+Mybatis+MySql 完整整合教程</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/Mysql知识点(一)—常用指令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="魏修瑞">
+      <meta itemprop="description" content="悠闲的宅的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悠闲的宅的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/10/Mysql知识点(一)—常用指令/" class="post-title-link" itemprop="http://yoursite.com/index.html">Mysql知识点(一)—常用指令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-10 14:41:13 / 修改时间：14:43:50" itemprop="dateCreated datePublished" datetime="2019-01-10T14:41:13+08:00">2019-01-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="一-查看端口号"><a href="#一-查看端口号" class="headerlink" title="一 查看端口号"></a>一 查看端口号</h1><p>在mysql命令行中执行指令<code>show variables like &#39;port&#39;</code>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/28/Elasticsearch学习笔记(四)—基本的增删改查/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="魏修瑞">
+      <meta itemprop="description" content="悠闲的宅的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悠闲的宅的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/28/Elasticsearch学习笔记(四)—基本的增删改查/" class="post-title-link" itemprop="http://yoursite.com/index.html">Elasticsearch学习笔记(四)—基本的增删改查</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-28 14:22:41" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:41+08:00">2018-12-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-11 15:14:24" itemprop="dateModified" datetime="2019-01-11T15:14:24+08:00">2019-01-11</time>
               
             
           </span>
@@ -609,7 +1033,7 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:22:13 / 修改时间：14:24:48" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:13+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 14:22:13 / 修改时间：16:41:09" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:13+08:00">2018-12-28</time>
             
 
             
@@ -681,7 +1105,121 @@
       
         
           
-            
+            <h1 id="1-系统环境"><a href="#1-系统环境" class="headerlink" title="1 系统环境"></a>1 系统环境</h1><ul>
+<li><p>操作系统：CentOS Linux release 7.5.1804 (Core)</p>
+</li>
+<li><p>Java 1.8.0_181</p>
+</li>
+</ul>
+<h1 id="2-Elastic安装"><a href="#2-Elastic安装" class="headerlink" title="2 Elastic安装"></a>2 Elastic安装</h1><h2 id="2-1-安装的简单说明"><a href="#2-1-安装的简单说明" class="headerlink" title="2.1 安装的简单说明"></a>2.1 安装的简单说明</h2><p>按照<a href="https://www.elastic.co/cn/downloads/elasticsearch" target="_blank" rel="noopener">官网</a>的说明，安装步骤如下：</p>
+<ol>
+<li><p>下载和解压安装包</p>
+</li>
+<li><p>启动程序</p>
+</li>
+<li><p>检查是否启动成功</p>
+</li>
+</ol>
+<h2 id="2-2-下载安装包"><a href="#2-2-下载安装包" class="headerlink" title="2.2 下载安装包"></a>2.2 下载安装包</h2><p>打开<a href="https://www.elastic.co" target="_blank" rel="noopener">官网</a>，点击【下载】，选择Elasticsearch，再选择ZIP安装包</p>
+<p><img src="http://aishow.top/elastic-centos7安装-官网下载.png" alt=""></p>
+<h2 id="2-3启动服务"><a href="#2-3启动服务" class="headerlink" title="2.3启动服务"></a>2.3启动服务</h2><ol>
+<li><p>解压<code>tar -xvf elasticsearch-6.5.4.tar.gz</code></p>
+</li>
+<li><p>进入下载的目录<code>$ cd elasticsearch-6.5.4/bin</code></p>
+</li>
+<li><p>执行启动指令<code>$ ./elasticsearch</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[2018-12-28T15:36:18,278][INFO ][o.e.e.NodeEnvironment    ] [kdektch] using [1] data paths, mounts [[/ (rootfs)]], net usable_space [32.2gb], net total_space [49.9gb], types [rootfs]</span><br><span class="line">[2018-12-28T15:36:18,281][INFO ][o.e.e.NodeEnvironment    ] [kdektch] heap size [999mb], compressed ordinary object pointers [true]</span><br><span class="line">······</span><br><span class="line">······</span><br><span class="line">······</span><br><span class="line">[2018-12-28T15:36:32,269][INFO ][o.e.c.m.MetaDataIndexTemplateService] [kdektch] adding template [.monitoring-alerts] for index patterns [.monitoring-alerts-6]</span><br><span class="line">[2018-12-28T15:36:32,291][INFO ][o.e.c.m.MetaDataIndexTemplateService] [kdektch] adding template [.monitoring-kibana] for index patterns [.monitoring-kibana-6-*]</span><br><span class="line">[2018-12-28T15:36:32,380][INFO ][o.e.l.LicenseService     ] [kdektch] license [da80144f-ad52-444f-adea-181efb360f16] mode [basic] - valid</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="2-4-获取版本信息"><a href="#2-4-获取版本信息" class="headerlink" title="2.4 获取版本信息"></a>2.4 获取版本信息</h2><ol>
+<li><p>另开一个标签页</p>
+</li>
+<li><p>执行指令<code>$ curl localhost:9200</code></p>
+<p>控制台打印信息如下： </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># curl localhost:9200</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span> : <span class="string">"kdektch"</span>,</span><br><span class="line">  <span class="attr">"cluster_name"</span> : <span class="string">"elasticsearch"</span>,</span><br><span class="line">  <span class="attr">"cluster_uuid"</span> : <span class="string">"KLu4TCvUQN6USdx0yA1MpQ"</span>,</span><br><span class="line">  <span class="attr">"version"</span> : &#123;</span><br><span class="line">    <span class="attr">"number"</span> : <span class="string">"6.5.4"</span>,</span><br><span class="line">    <span class="attr">"build_flavor"</span> : <span class="string">"default"</span>,</span><br><span class="line">    <span class="attr">"build_type"</span> : <span class="string">"tar"</span>,</span><br><span class="line">    <span class="attr">"build_hash"</span> : <span class="string">"d2ef93d"</span>,</span><br><span class="line">    <span class="attr">"build_date"</span> : <span class="string">"2018-12-17T21:17:40.758843Z"</span>,</span><br><span class="line">    <span class="attr">"build_snapshot"</span> : <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"lucene_version"</span> : <span class="string">"7.5.0"</span>,</span><br><span class="line">    <span class="attr">"minimum_wire_compatibility_version"</span> : <span class="string">"5.6.0"</span>,</span><br><span class="line">    <span class="attr">"minimum_index_compatibility_version"</span> : <span class="string">"5.0.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"tagline"</span> : <span class="string">"You Know, for Search"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="2-5-备注"><a href="#2-5-备注" class="headerlink" title="2.5 备注"></a>2.5 备注</h2><ul>
+<li><p>停止Elastic，在启动选项卡中直接<code>control+c</code>即可停止。</p>
+</li>
+<li><p>如果你想把 Elasticsearch 作为一个守护进程在后台运行，那么可以在后面添加参数 <code>-d</code>。</p>
+</li>
+<li><p>默认情况下，Elastics只允许本机访问，如果需要远程访问，可以修改 Elastic 安装目录的<code>config/elasticsearch.yml</code>文件，去掉<code>network.host</code>的注释，将它的值改成<code>0.0.0.0</code>，然后重新启动 Elastic。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#network.host: 192.168.0.1</span><br><span class="line">network.host: 0.0.0.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装中文插件</p>
+<p>在安装目录下，运行指令：<code>$ ./elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip</code>。</p>
+<p>注意版本要一致。</p>
+<p>安装完成后，重启。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># ./elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip</span><br><span class="line">-&gt; Downloading https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip</span><br><span class="line">[=================================================] 100%   </span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@     WARNING: plugin requires additional permissions     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">* java.net.SocketPermission * connect,resolve</span><br><span class="line">See http://docs.oracle.com/javase/8/docs/technotes/guides/security/permissions.html</span><br><span class="line">for descriptions of what these permissions allow and the associated risks.</span><br><span class="line"></span><br><span class="line">Continue with installation? [y/N]y</span><br><span class="line">-&gt; Installed analysis-ik</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="3-Kibana安装"><a href="#3-Kibana安装" class="headerlink" title="3 Kibana安装"></a>3 Kibana安装</h1><h2 id="3-1-安装的简单说明"><a href="#3-1-安装的简单说明" class="headerlink" title="3.1 安装的简单说明"></a>3.1 安装的简单说明</h2><p>按照官网给出的资料（<a href="https://www.elastic.co/cn/downloads/kibana" target="_blank" rel="noopener">链接</a>），安装步骤顺序如下：</p>
+<ol>
+<li><p>下载Kibana安装包</p>
+</li>
+<li><p>打开<code>config/kibana.yml</code>配置文件，并进行设置</p>
+</li>
+<li><p>运行指令启动Kibana</p>
+</li>
+<li><p>打开浏览器访问<code>http://localhost:5601</code></p>
+</li>
+</ol>
+<h2 id="3-2-下载安装包"><a href="#3-2-下载安装包" class="headerlink" title="3.2 下载安装包"></a>3.2 下载安装包</h2><p>打开<a href="https://www.elastic.co" target="_blank" rel="noopener">官网</a>，点击【下载】，选择Kibana，再选择<a href="https://artifacts.elastic.co/downloads/kibana/kibana-6.5.4-linux-x86_64.tar.gz" target="_blank" rel="noopener">LINUX 64-BIT</a>安装包。</p>
+<p><img src="http://aishow.top/elastic-centos7安装-kibana官网下载.png" alt=""></p>
+<h2 id="3-3-修改配置文件"><a href="#3-3-修改配置文件" class="headerlink" title="3.3 修改配置文件"></a>3.3 修改配置文件</h2><ol>
+<li><p>将下载的安装包进行解压<code># tar -zvxf kibana-6.5.4-linux-x86_64.tar.gz</code>。</p>
+</li>
+<li><p>进入解压后目录的config目录下<code># cd kibana-6.5.4-linux-x86_64/config/</code>。</p>
+</li>
+<li><p>找到kibana.yml文件，进行编辑<code>$ vim kibana.yml</code>。</p>
+</li>
+<li><p>找到<code>elasticsearch.url</code>，去掉前面的注释，并且将值设置为Elasticsearch的实例。更改如下图</p>
+<p><img src="http://aishow.top/elastic-mac安装-修改配置文件.png" alt=""></p>
+</li>
+</ol>
+<h2 id="3-4-启动服务"><a href="#3-4-启动服务" class="headerlink" title="3.4 启动服务"></a>3.4 启动服务</h2><p>进入安装目录的config文件夹下，执行指令<code>$ ./kibana</code>。</p>
+<p><img src="http://aishow.top/elastic-mac安装-启动服务.png" alt=""></p>
+<h2 id="3-5-打开浏览器访问"><a href="#3-5-打开浏览器访问" class="headerlink" title="3.5 打开浏览器访问"></a>3.5 打开浏览器访问</h2><p>打开浏览器，输入地址<code>http://localhost:5601</code>。</p>
+<p><img src="http://aishow.top/elastic-mac%E5%AE%89%E8%A3%85-%E9%A1%B5%E9%9D%A2%E8%AE%BF%E9%97%AE.png" alt=""></p>
+<h1 id="4-安装遇到的问题"><a href="#4-安装遇到的问题" class="headerlink" title="4 安装遇到的问题"></a>4 安装遇到的问题</h1><h2 id="4-1-启动失败-一"><a href="#4-1-启动失败-一" class="headerlink" title="4.1 启动失败(一)"></a>4.1 启动失败(一)</h2><ul>
+<li><p>错误日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[2018-12-28T15:30:59,095][WARN ][o.e.b.ElasticsearchUncaughtExceptionHandler] [unknown] uncaught exception in thread [main]</span><br><span class="line">org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:140) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:127) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:86) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:124) ~[elasticsearch-cli-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.cli.Command.main(Command.java:90) ~[elasticsearch-cli-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:93) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:86) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">Caused by: java.lang.RuntimeException: can not run elasticsearch as root</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:103) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:170) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:333) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:136) ~[elasticsearch-6.5.4.jar:6.5.4]</span><br><span class="line">	... 6 more</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>错误原因</p>
+<p>不能使用<code>root</code>账户启动elasticsearch</p>
+</li>
+<li><p>解决思路</p>
+<p>创建一个新用户elastic来启动</p>
+</li>
+<li><p>解决步骤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost local]# adduser elastic     --创建用户elastic</span><br><span class="line">[root@localhost local]# passwd elastic      --更改用户密码</span><br><span class="line">更改用户 elastic 的密码 。</span><br><span class="line">新的 密码：</span><br><span class="line">无效的密码： 密码少于 8 个字符</span><br><span class="line">重新输入新的 密码：</span><br><span class="line">passwd：所有的身份验证令牌已经成功更新。</span><br><span class="line">[root@localhost local]# chown -R elastic:elastic elasticsearch-6.5.4   --elastic赋权</span><br><span class="line">[root@localhost local]# su elastic      --切换elastic用户</span><br><span class="line">[elastic@localhost local]$ pwd</span><br><span class="line">/usr/local</span><br><span class="line">[elastic@localhost local]$ cd elasticsearch-6.5.4/bin/   --进入安装目录</span><br><span class="line">[elastic@localhost bin]$ ./elasticsearch   --启动</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-2-启动失败-二"><a href="#4-2-启动失败-二" class="headerlink" title="4.2 启动失败(二)"></a>4.2 启动失败(二)</h2><ul>
+<li><p>错误日志</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max virtual memory areas vm.max_map_count [65530] likely too low, increase to at least [262144]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决步骤</p>
+<p>用<code>root</code>用户修改配置文件<code>/etc/sysctl.conf</code>，添加配置<code>vm.max_map_count=655360</code>。修改完毕后执行执行<code>sysctl -p</code></p>
+</li>
+</ul>
+<h2 id="4-3-启动失败-三"><a href="#4-3-启动失败-三" class="headerlink" title="4.3 启动失败(三)"></a>4.3 启动失败(三)</h2><ul>
+<li><p>错误日志</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决步骤</p>
+<p>用<code>root</code>用户修改配置文件<code>/etc/security/limits.conf</code>，添加配置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*               soft    nofile          65536</span><br><span class="line">*               hard    nofile          65536</span><br></pre></td></tr></table></figure>
+<p>文件修改完毕后，需要重新打开新的terminal才会生效。</p>
+</li>
+</ul>
+<h1 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5 参考资料"></a>5 参考资料</h1><blockquote>
+<p><a href="https://www.elastic.co" target="_blank" rel="noopener">elastic官网</a></p>
+<p><a href="https://www.cnblogs.com/sloveling/p/elasticsearch.html" target="_blank" rel="noopener">Elasticsearch5.0 安装问题集锦</a></p>
+<p><a href="https://www.cnblogs.com/zhi-leaf/p/8484337.html" target="_blank" rel="noopener">elasticsearch启动常见错误</a></p>
+</blockquote>
+
           
         
       
@@ -782,7 +1320,7 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:21:54 / 修改时间：15:12:46" itemprop="dateCreated datePublished" datetime="2018-12-28T14:21:54+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 14:21:54 / 修改时间：15:43:02" itemprop="dateCreated datePublished" datetime="2018-12-28T14:21:54+08:00">2018-12-28</time>
             
 
             
@@ -886,7 +1424,7 @@
 </li>
 <li><p>执行启动指令<code>$ ./bin/elasticsearch</code></p>
 <p>控制台打印信息如下图：</p>
-<p><img src="http://aishow.top/elastic-mac安装-启动服务.png" alt=""></p>
+<p><img src="http://aishow.top/elastic-mac安装-启动服务器.png" alt=""></p>
 </li>
 </ol>
 <h2 id="2-4-获取版本信息"><a href="#2-4-获取版本信息" class="headerlink" title="2.4 获取版本信息"></a>2.4 获取版本信息</h2><ol>
@@ -2486,7 +3024,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2519,7 +3057,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2544,7 +3088,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2609,7 +3159,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

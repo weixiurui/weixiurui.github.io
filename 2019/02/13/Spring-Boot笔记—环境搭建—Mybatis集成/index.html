@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1 目的&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;搭建一个spring boot + Mybatis + MVC的环境 2 开发环境和开发工具 开发工具：IntelliJ IDEA 2018.1 Maven: 3.6.0 Mysql: 8.0.13  3 开始搭建3.1 最终的项目结构 3.2 创建一个Spring Boot的maven工程&amp;n">
+<meta name="keywords" content="Spring Boot,Mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot笔记—搭建Mybatis环境">
+<meta property="og:url" content="http://yoursite.com/2019/02/13/Spring-Boot笔记—环境搭建—Mybatis集成/index.html">
+<meta property="og:site_name" content="悠闲的宅的博客">
+<meta property="og:description" content="1 目的&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;搭建一个spring boot + Mybatis + MVC的环境 2 开发环境和开发工具 开发工具：IntelliJ IDEA 2018.1 Maven: 3.6.0 Mysql: 8.0.13  3 开始搭建3.1 最终的项目结构 3.2 创建一个Spring Boot的maven工程&amp;n">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://aishow.top/%E9%9B%86%E6%88%90Mybatis%E5%90%8E%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png">
+<meta property="og:updated_time" content="2019-02-13T08:35:36.575Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot笔记—搭建Mybatis环境">
+<meta name="twitter:description" content="1 目的&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;搭建一个spring boot + Mybatis + MVC的环境 2 开发环境和开发工具 开发工具：IntelliJ IDEA 2018.1 Maven: 3.6.0 Mysql: 8.0.13  3 开始搭建3.1 最终的项目结构 3.2 创建一个Spring Boot的maven工程&amp;n">
+<meta name="twitter:image" content="http://aishow.top/%E9%9B%86%E6%88%90Mybatis%E5%90%8E%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/13/Spring-Boot笔记—环境搭建—Mybatis集成/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Spring Boot笔记—搭建Mybatis环境 | 悠闲的宅的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">悠闲的宅的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">悠闲的宅的博客</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/13/Spring-Boot笔记—环境搭建—Mybatis集成/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="魏修瑞">
+      <meta itemprop="description" content="悠闲的宅的博客">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="悠闲的宅的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring Boot笔记—搭建Mybatis环境
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-13 14:58:52 / 修改时间：16:35:36" itemprop="dateCreated datePublished" datetime="2019-02-13T14:58:52+08:00">2019-02-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/" itemprop="url" rel="index"><span itemprop="name">工作技能</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/" itemprop="url" rel="index"><span itemprop="name">框架</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/Spring/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/框架/Spring/Spring-Boot/环境搭建/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-目的"><a href="#1-目的" class="headerlink" title="1 目的"></a>1 目的</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;搭建一个spring boot + Mybatis + MVC的环境</p>
+<h1 id="2-开发环境和开发工具"><a href="#2-开发环境和开发工具" class="headerlink" title="2 开发环境和开发工具"></a>2 开发环境和开发工具</h1><ul>
+<li>开发工具：IntelliJ IDEA 2018.1</li>
+<li>Maven: 3.6.0</li>
+<li>Mysql: 8.0.13</li>
+</ul>
+<h1 id="3-开始搭建"><a href="#3-开始搭建" class="headerlink" title="3 开始搭建"></a>3 开始搭建</h1><h2 id="3-1-最终的项目结构"><a href="#3-1-最终的项目结构" class="headerlink" title="3.1 最终的项目结构"></a>3.1 最终的项目结构</h2><p><img src="http://aishow.top/%E9%9B%86%E6%88%90Mybatis%E5%90%8E%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt="集成Mybatis后的工程整体架构"></p>
+<h2 id="3-2-创建一个Spring-Boot的maven工程"><a href="#3-2-创建一个Spring-Boot的maven工程" class="headerlink" title="3.2 创建一个Spring Boot的maven工程"></a>3.2 创建一个Spring Boot的maven工程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;此步骤省略</p>
+<h2 id="3-3-添加maven相关依赖"><a href="#3-3-添加maven相关依赖" class="headerlink" title="3.3 添加maven相关依赖"></a>3.3 添加maven相关依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mysql --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- druid --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">&lt;!-- mybatis --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- swagger --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-4-创建项目配置文件"><a href="#3-4-创建项目配置文件" class="headerlink" title="3.4 创建项目配置文件"></a>3.4 创建项目配置文件</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在<code>resources</code>目录下创建<code>application.yml</code>文件，设置tomcat端口，设置数据库连接信息。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">8989</span></span><br><span class="line"><span class="attr">    tomcat:</span></span><br><span class="line"><span class="attr">        uri-encoding:</span> <span class="string">UTF-8</span></span><br><span class="line"><span class="attr">        max-threads:</span> <span class="number">1000</span></span><br><span class="line"><span class="attr">        min-spare-threads:</span> <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line"><span class="attr">    driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span> <span class="comment"># 这是mysql8.0.13版本的驱动。</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://localhost:3306/rabbit?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">xxxxxxxxx</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span> <span class="comment"># 数据源类型：Druid</span></span><br><span class="line"><span class="attr">    initialSize:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">    minIdle:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">    maxActive:</span> <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-5-在启动类添加注解"><a href="#3-5-在启动类添加注解" class="headerlink" title="3.5 在启动类添加注解"></a>3.5 在启动类添加注解</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在启动类<code>DataxApplication.java</code>里，添加扫描mapper的注解<code>@MapperScan(&quot;top.yxdz.**.mapper&quot;)</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableTransactionManagement</span></span><br><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"top.yxdz.**.mapper"</span>)</span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataxApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DataxApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-6-添加contoller"><a href="#3-6-添加contoller" class="headerlink" title="3.6 添加contoller"></a>3.6 添加contoller</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在controller目录下，添加类<code>JobController.java</code>，调用service层的<code>getJobById(String id)</code>方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/api/job"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JobController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    IJobService iJobService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/&#123;id&#125;/info"</span>)</span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"通过作业id获取作业信息"</span>, response = AjaxResult.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> AjaxResult <span class="title">getJobById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> String id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iJobService.getJobById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-7-添加service"><a href="#3-7-添加service" class="headerlink" title="3.7 添加service"></a>3.7 添加service</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在service目录下，添加接口<code>IJobService.java</code>，在该目录下的<code>impl</code>添加该接口的实现类<code>JobServiceImpl.java</code></p>
+<h3 id="3-7-1-IJobService-java"><a href="#3-7-1-IJobService-java" class="headerlink" title="3.7.1 IJobService.java"></a>3.7.1 <code>IJobService.java</code></h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该接口定义一个方法<code>getJobById(String id)</code>，实现通过id从数据库查找对应数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IJobService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过id获取作业内容</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> JobEntity</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">AjaxResult <span class="title">getJobById</span><span class="params">(String id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-7-2-JobServiceImpl-java"><a href="#3-7-2-JobServiceImpl-java" class="headerlink" title="3.7.2 JobServiceImpl.java"></a>3.7.2 <code>JobServiceImpl.java</code></h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该类是接口<code>IJobService.java</code>的实现类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span>(<span class="string">"JobServiceImpl"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JobServiceImpl</span> <span class="keyword">implements</span> <span class="title">IJobService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger LOG = LogManager.getLogger(JobServiceImpl.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    JobMapper jobMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AjaxResult <span class="title">getJobById</span><span class="params">(String id)</span></span>&#123;</span><br><span class="line">        AjaxResult result = <span class="keyword">new</span> AjaxResult();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            JobEntity jobEntity = jobMapper.getJobById(id);</span><br><span class="line"></span><br><span class="line">            result.setCode(Constants.SUCCESS);</span><br><span class="line">            result.setData(jobEntity);</span><br><span class="line">            result.setMsg(<span class="string">"获取作业["</span> + id + <span class="string">"]信息成功"</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            result.setMsg(<span class="string">"获取作业["</span> + id + <span class="string">"]信息失败"</span>);</span><br><span class="line">            LOG.error(<span class="string">"获取作业[&#123;&#125;]失败：&#123;&#125;"</span>, id, e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-8-添加mapper"><a href="#3-8-添加mapper" class="headerlink" title="3.8 添加mapper"></a>3.8 添加mapper</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在mapper目录下，分别创建文件<code>JobMapper.java</code>、<code>JobMapper.xml</code>。</p>
+<h3 id="3-8-1-JobMapper-java"><a href="#3-8-1-JobMapper-java" class="headerlink" title="3.8.1 JobMapper.java"></a>3.8.1 <code>JobMapper.java</code></h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件是一个接口文件，定义了通过mybatis访问数据库的函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">JobMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据id获取作业信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 作业id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> JobEntity</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">JobEntity <span class="title">getJobById</span><span class="params">(String id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-8-2-JobMapper-xml"><a href="#3-8-2-JobMapper-xml" class="headerlink" title="3.8.2 JobMapper.xml"></a>3.8.2 <code>JobMapper.xml</code></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"top.yxdz.datax.job.mapper.JobMapper"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"top.yxdz.datax.job.entity.JobEntity"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span>  /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"Base_Column_List"</span>&gt;</span></span><br><span class="line">      id, name</span><br><span class="line">    <span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getJobById"</span> <span class="attr">resultMap</span>=<span class="string">"BaseResultMap"</span>&gt;</span></span><br><span class="line">        select</span><br><span class="line">          <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"Base_Column_List"</span> /&gt;</span></span><br><span class="line">        from tbl_datax_job</span><br><span class="line">        where id=#&#123;id, jdbcType=VARCHAR&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-9-添加entity"><a href="#3-9-添加entity" class="headerlink" title="3.9 添加entity"></a>3.9 添加entity</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在mapper目录下，创建数据库表对应的实体类<code>JobEntity</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JobEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(String id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"JobEntity&#123;"</span> +</span><br><span class="line">                <span class="string">"   id="</span> + id + <span class="string">"\n"</span> +</span><br><span class="line">                <span class="string">"   name"</span> + name + <span class="string">"\n"</span> +</span><br><span class="line">                <span class="string">"&#125;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-10-测试"><a href="#3-10-测试" class="headerlink" title="3.10 测试"></a>3.10 测试</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上配置完毕，开始测试。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;启动项目。</p>
+<h3 id="3-10-1-配置了swagger"><a href="#3-10-1-配置了swagger" class="headerlink" title="3.10.1 配置了swagger"></a>3.10.1 配置了swagger</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在地址栏输入地址<code>http://localhost:8989/swagger-ui.html</code>，然后找到刚才写的restful接口，将参数id的值<code>da0c96dc-2c0b-429d-ab33-cb44ff7b6677</code>放进去执行一下查看返回的结果是否正确。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"code"</span>: <span class="string">"SUCCESS"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: &#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"da0c96dc-2c0b-429d-ab33-cb44ff7b6677"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"mysql2mysql"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"msg"</span>: <span class="string">"获取作业[da0c96dc-2c0b-429d-ab33-cb44ff7b6677]信息成功"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-10-2-未配置swagger"><a href="#3-10-2-未配置swagger" class="headerlink" title="3.10.2 未配置swagger"></a>3.10.2 未配置swagger</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在地址栏输入地址<code>http://localhost:8989/api/job/da0c96dc-2c0b-429d-ab33-cb44ff7b6677/info</code>直接查看返回页面的内容是否正确(因为是测试的接口是GET请求，所以可以直接在地址栏运行。如果是其他类型请求，则需要使用postman模仿相关请求)。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"SUCCESS"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"id"</span>: <span class="string">"da0c96dc-2c0b-429d-ab33-cb44ff7b6677"</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"mysql2mysql"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"msg"</span>: <span class="string">"获取作业[da0c96dc-2c0b-429d-ab33-cb44ff7b6677]信息成功"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-遇到的问题"><a href="#4-遇到的问题" class="headerlink" title="4 遇到的问题"></a>4 遇到的问题</h1><h2 id="4-1-Invalid-bound-statement-not-found"><a href="#4-1-Invalid-bound-statement-not-found" class="headerlink" title="4.1 Invalid bound statement (not found)"></a>4.1 <code>Invalid bound statement (not found)</code></h2><ul>
+<li><p>错误日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 45545 --- [nio-8989-exec-1] t.y.d.job.service.impl.JobServiceImpl    : 获取作业[da0c96dc-2c0b-429d-ab33-cb44ff7b6677]失败：Invalid bound statement (not found): top.yxdz.datax.job.mapper.JobMapper.getJobById</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原因</p>
+<p>未将<code>JobMapper.xml</code>的内容加载进去</p>
+</li>
+<li><p>解决方法</p>
+<p>在<code>pom.xml</code>文件中，将一下内容加进去</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-2-spring注解方式-idea报could-not-autowire"><a href="#4-2-spring注解方式-idea报could-not-autowire" class="headerlink" title="4.2 spring注解方式 idea报could not autowire"></a>4.2 spring注解方式 idea报could not autowire</h2><ul>
+<li><p>错误日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Could not autowire. No beans of ‘jobMapper’ type found.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原因</p>
+</li>
+<li><p>解决方法</p>
+<p><code>File</code>-<code>Project Structure</code>页面 <code>Facets</code>下删掉 <code>Spring</code>。</p>
+</li>
+</ul>
+<h1 id="5-参考文章"><a href="#5-参考文章" class="headerlink" title="5 参考文章"></a>5 参考文章</h1><blockquote>
+<p><a href="https://www.oschina.net/question/202626_181237" target="_blank" rel="noopener">spring注解方式 idea报could not autowire，eclipse却没有问题</a></p>
+<p><a href="https://blog.csdn.net/qq_33768099/article/details/79787215" target="_blank" rel="noopener">Spring Boot+Mybatis+MySql 完整整合教程</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+          
+            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/10/Mysql知识点(一)—常用指令/" rel="next" title="Mysql知识点(一)—常用指令">
+                <i class="fa fa-chevron-left"></i> Mysql知识点(一)—常用指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">魏修瑞</p>
+              <p class="site-description motion-element" itemprop="description">悠闲的宅的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/weixiurui" title="GitHub &rarr; https://github.com/weixiurui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:weiiurui@qq.com" title="E-Mail &rarr; mailto:weiiurui@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-目的"><span class="nav-text">1 目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-开发环境和开发工具"><span class="nav-text">2 开发环境和开发工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-开始搭建"><span class="nav-text">3 开始搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-最终的项目结构"><span class="nav-text">3.1 最终的项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-创建一个Spring-Boot的maven工程"><span class="nav-text">3.2 创建一个Spring Boot的maven工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-添加maven相关依赖"><span class="nav-text">3.3 添加maven相关依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-创建项目配置文件"><span class="nav-text">3.4 创建项目配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-在启动类添加注解"><span class="nav-text">3.5 在启动类添加注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-添加contoller"><span class="nav-text">3.6 添加contoller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-添加service"><span class="nav-text">3.7 添加service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-1-IJobService-java"><span class="nav-text">3.7.1 IJobService.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-2-JobServiceImpl-java"><span class="nav-text">3.7.2 JobServiceImpl.java</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-添加mapper"><span class="nav-text">3.8 添加mapper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-1-JobMapper-java"><span class="nav-text">3.8.1 JobMapper.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-2-JobMapper-xml"><span class="nav-text">3.8.2 JobMapper.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-9-添加entity"><span class="nav-text">3.9 添加entity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-10-测试"><span class="nav-text">3.10 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-10-1-配置了swagger"><span class="nav-text">3.10.1 配置了swagger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-10-2-未配置swagger"><span class="nav-text">3.10.2 未配置swagger</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-遇到的问题"><span class="nav-text">4 遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Invalid-bound-statement-not-found"><span class="nav-text">4.1 Invalid bound statement (not found)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-spring注解方式-idea报could-not-autowire"><span class="nav-text">4.2 spring注解方式 idea报could not autowire</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-参考文章"><span class="nav-text">5 参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">魏修瑞</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
