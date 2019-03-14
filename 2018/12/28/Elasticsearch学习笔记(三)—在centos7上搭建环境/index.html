@@ -121,7 +121,7 @@
 <meta property="og:image" content="http://aishow.top/elastic-mac安装-修改配置文件.png">
 <meta property="og:image" content="http://aishow.top/elastic-mac安装-启动服务.png">
 <meta property="og:image" content="http://aishow.top/elastic-mac%E5%AE%89%E8%A3%85-%E9%A1%B5%E9%9D%A2%E8%AE%BF%E9%97%AE.png">
-<meta property="og:updated_time" content="2018-12-28T08:41:09.979Z">
+<meta property="og:updated_time" content="2019-02-22T01:30:28.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch学习笔记(三)—在centos7上搭建环境">
 <meta name="twitter:description" content="1 系统环境 操作系统：CentOS Linux release 7.5.1804 (Core)  Java 1.8.0_181   2 Elastic安装2.1 安装的简单说明按照官网的说明，安装步骤如下：  下载和解压安装包  启动程序  检查是否启动成功   2.2 下载安装包打开官网，点击【下载】，选择Elasticsearch，再选择ZIP安装包  2.3启动服务 解压tar -xvf">
@@ -387,12 +387,24 @@
                 
               
 
-              <time title="创建时间：2018-12-28 14:22:13 / 修改时间：16:41:09" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:13+08:00">2018-12-28</time>
+              <time title="创建时间：2018-12-28 14:22:13" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:13+08:00">2018-12-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-22 09:30:28" itemprop="dateModified" datetime="2019-02-22T09:30:28+08:00">2019-02-22</time>
               
             
           </span>
@@ -409,21 +421,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/" itemprop="url" rel="index"><span itemprop="name">工作技能</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/大数据/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/大数据/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/工作技能/大数据/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/大数据/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a></span>
 
                 
                 
@@ -566,6 +571,12 @@
 <p>文件修改完毕后，需要重新打开新的terminal才会生效。</p>
 </li>
 </ul>
+<h2 id="4-4-kibana无法远程登录"><a href="#4-4-kibana无法远程登录" class="headerlink" title="4.4 kibana无法远程登录"></a>4.4 kibana无法远程登录</h2><ul>
+<li><p>解决步骤</p>
+<p>在<code>kibana/config</code>目录下，编辑<code>kibana.yml</code>，添加<code>server.host: &quot;0.0.0.0&quot;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.</span><br><span class="line"># The default is &apos;localhost&apos;, which usually means remote machines will not be able to connect.</span><br><span class="line"># To allow connections from remote users, set this parameter to a non-loopback address.</span><br><span class="line">#server.host: &quot;localhost&quot;</span><br><span class="line">server.host: &quot;0.0.0.0&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <h1 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5 参考资料"></a>5 参考资料</h1><blockquote>
 <p><a href="https://www.elastic.co" target="_blank" rel="noopener">elastic官网</a></p>
 <p><a href="https://www.cnblogs.com/sloveling/p/elasticsearch.html" target="_blank" rel="noopener">Elasticsearch5.0 安装问题集锦</a></p>
@@ -691,7 +702,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -736,7 +747,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -773,7 +788,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -834,7 +853,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-系统环境"><span class="nav-text">1 系统环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Elastic安装"><span class="nav-text">2 Elastic安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-安装的简单说明"><span class="nav-text">2.1 安装的简单说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-下载安装包"><span class="nav-text">2.2 下载安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3启动服务"><span class="nav-text">2.3启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-获取版本信息"><span class="nav-text">2.4 获取版本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-备注"><span class="nav-text">2.5 备注</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Kibana安装"><span class="nav-text">3 Kibana安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-安装的简单说明"><span class="nav-text">3.1 安装的简单说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-下载安装包"><span class="nav-text">3.2 下载安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-修改配置文件"><span class="nav-text">3.3 修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-启动服务"><span class="nav-text">3.4 启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-打开浏览器访问"><span class="nav-text">3.5 打开浏览器访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-安装遇到的问题"><span class="nav-text">4 安装遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-启动失败-一"><span class="nav-text">4.1 启动失败(一)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-启动失败-二"><span class="nav-text">4.2 启动失败(二)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-启动失败-三"><span class="nav-text">4.3 启动失败(三)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-参考资料"><span class="nav-text">5 参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-系统环境"><span class="nav-text">1 系统环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Elastic安装"><span class="nav-text">2 Elastic安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-安装的简单说明"><span class="nav-text">2.1 安装的简单说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-下载安装包"><span class="nav-text">2.2 下载安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3启动服务"><span class="nav-text">2.3启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-获取版本信息"><span class="nav-text">2.4 获取版本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-备注"><span class="nav-text">2.5 备注</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Kibana安装"><span class="nav-text">3 Kibana安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-安装的简单说明"><span class="nav-text">3.1 安装的简单说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-下载安装包"><span class="nav-text">3.2 下载安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-修改配置文件"><span class="nav-text">3.3 修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-启动服务"><span class="nav-text">3.4 启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-打开浏览器访问"><span class="nav-text">3.5 打开浏览器访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-安装遇到的问题"><span class="nav-text">4 安装遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-启动失败-一"><span class="nav-text">4.1 启动失败(一)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-启动失败-二"><span class="nav-text">4.2 启动失败(二)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-启动失败-三"><span class="nav-text">4.3 启动失败(三)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-kibana无法远程登录"><span class="nav-text">4.4 kibana无法远程登录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-参考资料"><span class="nav-text">5 参考资料</span></a></li></ol></div>
             
 
           </div>
